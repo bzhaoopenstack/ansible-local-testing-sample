@@ -2,5 +2,22 @@
   connection: local
   become: yes
   become_user: root
-  roles:
-    - nginx
+  tasks:
+    - name: Copy necessary scripts
+      template:
+        src: /root/ansible_test/kp_local_loop.py
+        dest: /root/ansible_test/kp_local_loop.py_cp
+        mode: 0755
+      vars:
+        zk_cli_conf: "/etc/openlabcmd/etc/openlab.conf"
+        heartbeat_internal: 100
+        ori_master_ip: "ORI_MASTER_IP"
+        ori_backup_ip: "ORI_BACKUP_IP"
+        slave_ip: "ZUUL_WEB_SLAVE_IP"
+        slave_backup_ip: "ZUUL_WEB_SLAVE_IP_same"
+        use_test_url: True
+        dns_access_token: "DNS_ACCESS_TOKEN"
+        dns_account_id: "DNS_ACCOUNT_ID"
+        use_test_account: True
+        test_github_token: "TEST_GITHUB_TOKEN"
+        test_repo_name: "TEST_REPO_NAME"
